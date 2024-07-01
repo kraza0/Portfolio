@@ -1,25 +1,53 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { AiFillEye, AiFillGithub } from "react-icons/ai";
 import { motion } from "framer-motion";
 
 import { AppWrap, MotionWrap } from "../../wrapper";
-import { urlFor, client } from "../../client";
 import "./Work.scss";
+import Image1 from '../../assets/Nexus.jpg';
+import Image2 from '../../assets/project2.jpg';
+import Image3 from '../../assets/project3.jpg';
+import Image4 from '../../assets/about04.png';
+
+const staticWorksData = [
+  {
+    title: "Nexus Pro",
+    description: "A complete solution for your lab.",
+    projectLink: "https://nexuspro.pk/",
+    codeLink: "https://github.com/example/project1",
+    imgUrl: Image1,
+    tags: ["Web App"],
+  },
+  {
+    title: "E-Shop",
+    description: "E-commerce clothing store.",
+    projectLink: "https://nexuspro.pk/",
+    codeLink: "https://github.com/example/project2",
+    imgUrl: Image2,
+    tags: ["Web App"],
+  },
+  {
+    title: "Project 3",
+    description: "Description of project 3.",
+    projectLink: "https://nexuspro.pk/",
+    codeLink: "https://github.com/example/project3",
+    imgUrl: Image3,
+    tags: ["Web App"],
+  },
+  {
+    title: "Project 4",
+    description: "Description of project 4.",
+    projectLink: "https://nexuspro.pk/",
+    codeLink: "https://github.com/example/project4",
+    imgUrl: Image4,
+    tags: ["Web App"],
+  },
+];
 
 const Work = () => {
-  const [works, setWorks] = useState([]);
-  const [filterWork, setFilterWork] = useState([]);
+  const [filterWork, setFilterWork] = useState(staticWorksData);
   const [activeFilter, setActiveFilter] = useState("All");
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
-
-  useEffect(() => {
-    const query = '*[_type == "works"]';
-
-    client.fetch(query).then((data) => {
-      setWorks(data);
-      setFilterWork(data);
-    });
-  }, []);
 
   const handleWorkFilter = (item) => {
     setActiveFilter(item);
@@ -29,9 +57,9 @@ const Work = () => {
       setAnimateCard([{ y: 0, opacity: 1 }]);
 
       if (item === "All") {
-        setFilterWork(works);
+        setFilterWork(staticWorksData);
       } else {
-        setFilterWork(works.filter((work) => work.tags.includes(item)));
+        setFilterWork(staticWorksData.filter((work) => work.tags.includes(item)));
       }
     }, 500);
   };
@@ -66,7 +94,7 @@ const Work = () => {
         {filterWork.map((work, index) => (
           <div className="app__work-item app__flex" key={index}>
             <div className="app__work-img app__flex">
-              <img src={urlFor(work.imgUrl)} alt={work.name} />
+              <img src={work.imgUrl} alt={work.name} />
 
               <motion.div
                 whileHover={{ opacity: [0, 1] }}

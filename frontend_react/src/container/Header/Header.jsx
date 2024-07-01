@@ -19,6 +19,7 @@ const scaleVarients = {
 };
 
 const Header = () => {
+  const resumeUrl = 'https://drive.google.com/file/d/1YcUfbvO2uFTYiAJtCmgCdIiYB7S67C4g/view?usp=sharing';
   return (
     <div className="app__header app__flex">
       <motion.div
@@ -36,6 +37,11 @@ const Header = () => {
           </div>
           <div className="tag-cmp app__flex">
             <p className="p-text">Frontend Developer</p>
+          </div>
+          <div className="tag-cmp app__flex">
+          <a href={resumeUrl} target="_blank" rel="noopener noreferrer" className="resume-link">
+              <p className="p-text">My Resume</p>
+            </a>
           </div>
         </div>
       </motion.div>
